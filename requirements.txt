@@ -3,3 +3,8 @@ numpy
 seaborn
 matplotlib
 nltk
+folium
+Jinja2
+requests
+ipykernel
+nbformat
