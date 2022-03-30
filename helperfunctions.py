@@ -2,6 +2,8 @@ import json
 import folium
 import matplotlib as mpl
 import numpy as np
+
+
 def generateBaseMap(default_location, default_zoom_start=12):
     base_map = folium.Map(location=default_location, control_scale=True, zoom_start=default_zoom_start)
     return base_map
@@ -110,3 +112,14 @@ def draw_grid(grid, default_location):
         #gj.add_child(popups[i])
         m.add_child(gj)
     return m
+
+
+def get_country_specific_information():
+
+    NY_location = [40.76160, -73.97564]
+    L_location = [51.50762, -0.12708]
+
+    NY_num = 20
+    L_num = 20
+
+    return NY_location, L_location, NY_num, L_num
