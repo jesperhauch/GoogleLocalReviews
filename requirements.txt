@@ -4,5 +4,4 @@ seaborn
 matplotlib
 nltk
 folium
-ipynb
 requests
