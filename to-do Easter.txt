@@ -1,5 +1,4 @@
-Bundle businesses not categorized into other - JESPER
-    -   
+Bundle businesses not categorized into other - JESPER (DONE) 
 Dataframe of attributes/features - JO/AK
     -	Number of businesses in each cell
     -	Number of reviews in each cell
