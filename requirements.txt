@@ -10,3 +10,4 @@ vaderSentiment
 xgboost
 pyenchant
 langdetect
+deep-translator
