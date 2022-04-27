@@ -11,3 +11,5 @@ xgboost
 pyenchant
 langdetect
 deep-translator
+tensorflow
+keras
