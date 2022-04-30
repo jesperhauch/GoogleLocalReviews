@@ -13,3 +13,4 @@ langdetect
 deep-translator
 tensorflow
 keras
+keras-tuner
