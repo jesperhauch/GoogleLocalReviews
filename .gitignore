@@ -2,3 +2,4 @@ abaenv
 data
 __pycache__
 hyperparameter_tuning
+**/*.ipynb_checkpoints/
