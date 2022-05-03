@@ -1,7 +1,9 @@
 from definitions import ROOT_DIR
 import pandas as pd
+import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import pickle
+import os
 
 class Endpoint(object):
     """
@@ -9,10 +11,10 @@ class Endpoint(object):
     """
 
     def __init__(self):
-        self.places = pd.read_csv(ROOT_DIR + "/serialized/places_final.csv")
-        self.embeddings = pd.read_pickle(ROOT_DIR + "/serialized/continuous_embeddings.pkl")
+        self.places = pd.read_csv(ROOT_DIR + "/data/places_final.csv")
+        self.embeddings = pd.read_pickle(ROOT_DIR + "/data/continuous_embeddings.pkl")
 
-    def recommend(self, IDs, Ratings):
+    def predict(self, IDs, Ratings):
         # Define user df
         user = pd.DataFrame({'IDs':IDs, 'Rating':Ratings})
         # Save df of visited establishments
@@ -38,11 +40,4 @@ class Endpoint(object):
             recommendation['clean_index'] = [int(i[1:]) for i in recommendation.index] 
         
         # Return df similiarity to other grids
-        return recommendation.sort_values(by="cosine_similarity").tail(5).index.to_list()
-
-
-if __name__ == "__main__":
-    IDs = ['101742583391038750118','100574642292837870712']
-    Ratings = [4,2]
-    endpoint = Endpoint()
-    print(endpoint.recommend(IDs, Ratings))
+        return np.asarray(recommendation.sort_values(by="cosine_similarity").tail(5).index.to_numpy())
