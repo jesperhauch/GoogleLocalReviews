@@ -12,7 +12,8 @@ class Endpoint(object):
 
     def __init__(self):
         self.places = pd.read_csv(ROOT_DIR + "/data/places_final.csv")
-        self.embeddings = pd.read_pickle(ROOT_DIR + "/data/continuous_embeddings.pkl")
+        with open(ROOT_DIR + "/data/continuous_embeddings.pkl", "rb") as f:
+            self.embeddings = pickle.load(open(ROOT_DIR + "/data/continuous_embeddings.pkl", "rb"))
 
     def predict(self, IDs, Ratings):
         # Define user df
@@ -41,3 +42,9 @@ class Endpoint(object):
         
         # Return df similiarity to other grids
         return np.asarray(recommendation.sort_values(by="cosine_similarity").tail(5).index.to_numpy())
+
+if __name__ == "__main__":
+    IDs = ['101742583391038750118','100574642292837870712']
+    Ratings = [4,2]
+    ep = Endpoint()
+    print(ep.predict(IDs, Ratings))
