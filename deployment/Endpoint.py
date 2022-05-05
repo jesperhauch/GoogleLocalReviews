@@ -14,8 +14,9 @@ class Endpoint(object):
         self.places = pd.read_csv(ROOT_DIR + "/serialized/places_final.csv")
         self.embeddings = pd.DataFrame(pickle.load(open(ROOT_DIR + "/serialized/continuous_embeddings.pkl", "rb"))).T
 
-    def predict(self, IDs, Ratings):
+    def predict(self, x):
         # Define user df
+        IDs, Ratings = x
         user = pd.DataFrame({'IDs':IDs, 'Rating':Ratings})
         # Save df of visited establishments
         visited = self.places.loc[self.places.gPlusPlaceId.isin(IDs)][['gPlusPlaceId','city','Grid']]
@@ -46,4 +47,4 @@ if __name__ == "__main__":
     IDs = ['101742583391038750118','100574642292837870712']
     Ratings = [4,2]
     ep = Endpoint()
-    print(ep.predict(IDs, Ratings))
+    print(ep.predict([IDs, Ratings]))
