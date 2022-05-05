@@ -11,9 +11,8 @@ class Endpoint(object):
     """
 
     def __init__(self):
-        self.places = pd.read_csv(ROOT_DIR + "/data/places_final.csv")
-        with open(ROOT_DIR + "/data/continuous_embeddings.pkl", "rb") as f:
-            self.embeddings = pickle.load(open(ROOT_DIR + "/data/continuous_embeddings.pkl", "rb"))
+        self.places = pd.read_csv(ROOT_DIR + "/serialized/places_final.csv")
+        self.embeddings = pd.DataFrame(pickle.load(open(ROOT_DIR + "/serialized/continuous_embeddings.pkl", "rb"))).T
 
     def predict(self, IDs, Ratings):
         # Define user df
