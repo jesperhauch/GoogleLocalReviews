@@ -22,6 +22,7 @@ class Endpoint(object):
         visited = self.places.loc[self.places.gPlusPlaceId.isin(IDs)][['gPlusPlaceId','city','Grid']]
         # Add grid cell, city to user
         user = user.merge(visited, left_on='IDs', right_on='gPlusPlaceId')
+        user['Rating'] = pd.to_numeric(user['Rating'])
         # Save location user is from
         city = user.city.unique()[0]
 
