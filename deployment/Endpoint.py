@@ -44,7 +44,7 @@ class Endpoint(object):
         return recommendation.sort_values(by="cosine_similarity").tail(5).index.to_numpy()
 
 if __name__ == "__main__":
-    IDs = ['101742583391038750118','100574642292837870712']
-    Ratings = [4,2]
+    IDs = np.array(['101742583391038750118','100574642292837870712'])
+    Ratings = np.array([4,2])
     ep = Endpoint()
-    ep.predict([IDs, Ratings])
+    ep.predict(np.array([IDs, Ratings]))
