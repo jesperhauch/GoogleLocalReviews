@@ -14,10 +14,9 @@ class Endpoint(object):
         self.places = pd.read_csv(ROOT_DIR + "/serialized/places_final.csv")
         self.embeddings = pd.DataFrame(pickle.load(open(ROOT_DIR + "/serialized/continuous_embeddings.pkl", "rb"))).T
 
-    def predict(self, x):
+    def predict(self, x, feature_names):
         # Define user df
-        IDs, Ratings = x
-        user = pd.DataFrame({'IDs':IDs, 'Rating':Ratings})
+        user = pd.DataFrame(data=x, columns=feature_names)
         # Save df of visited establishments
         visited = self.places.loc[self.places.gPlusPlaceId.isin(IDs)][['gPlusPlaceId','city','Grid']]
         # Add grid cell, city to user
@@ -42,10 +41,15 @@ class Endpoint(object):
             recommendation['clean_index'] = [int(i[1:]) for i in recommendation.index] 
         
         # Return df similiarity to other grids
-        return recommendation.sort_values(by="cosine_similarity").tail(5).index.to_numpy()
+        resp = recommendation.sort_values(by="cosine_similarity").tail(5).index.to_numpy()
+        return resp
 
 if __name__ == "__main__":
-    IDs = np.array(['101742583391038750118','100574642292837870712'])
-    Ratings = np.array([4,2])
+    IDs = ['101742583391038750118','100574642292837870712']
+    Ratings = [4,2]
+
+    # Pythonic way to transpose list of lists 
+    data = list(map(list, zip(IDs, Ratings)))
+    feature_names = ['IDs', 'Rating']
     ep = Endpoint()
-    ep.predict(np.array([IDs, Ratings]))
+    print(ep.predict(data, feature_names))
