@@ -17,6 +17,7 @@ class Endpoint(object):
     def predict(self, x, feature_names):
         # Define user df
         user = pd.DataFrame(data=x, columns=feature_names)
+        IDs = user['IDs'].values
         # Save df of visited establishments
         visited = self.places.loc[self.places.gPlusPlaceId.isin(IDs)][['gPlusPlaceId','city','Grid']]
         # Add grid cell, city to user
@@ -41,7 +42,7 @@ class Endpoint(object):
             recommendation['clean_index'] = [int(i[1:]) for i in recommendation.index] 
         
         # Return df similiarity to other grids
-        resp = recommendation.sort_values(by="cosine_similarity").tail(5).index.to_numpy()
+        resp = np.asarray(recommendation.sort_values(by="cosine_similarity").tail(5).index)
         return resp
 
 if __name__ == "__main__":
