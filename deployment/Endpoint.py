@@ -12,7 +12,7 @@ class Endpoint(object):
     def __init__(self):
         # Initializations - places to map given gPlaceIds to grid cell and load of embeddings
         self.places = pd.read_csv(ROOT_DIR + "/serialized/places_final.csv")
-        self.embeddings = pd.DataFrame(pickle.load(open(ROOT_DIR + "/serialized/continuous_embeddings.pkl", "rb"))).T
+        self.embeddings = pd.DataFrame(pickle.load(open(ROOT_DIR + "/serialized/discrete_embeddings.pkl", "rb"))).T
 
     def predict(self, x, feature_names):
         # Define user df
