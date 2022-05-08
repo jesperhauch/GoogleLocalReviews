@@ -2,7 +2,10 @@ import json
 import folium
 import matplotlib as mpl
 import numpy as np
-
+import os
+import time
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 def generateBaseMap(default_location, default_zoom_start=12):
     base_map = folium.Map(location=default_location, control_scale=True, zoom_start=default_zoom_start)
@@ -123,3 +126,27 @@ def get_country_specific_information():
     L_num = 20
 
     return NY_location, L_location, NY_num, L_num
+
+
+
+
+def save_to_png(name,m):
+    
+    delay = 3
+
+    path=os.getcwd()
+    m.save(path+'/plots/'+name+'.html')
+
+    #Save the map as an HTML file
+    fn='/plots/{}.html'.format(name)
+    tmpurl= 'file://{path}/{mapfile}'.format(path=path,mapfile=fn)
+    #Open a browser window...
+    browser = webdriver.Chrome(ChromeDriverManager().install())
+    #..that displays the map...
+    browser.get(tmpurl)
+    #Give the map tiles some time to load
+    time.sleep(delay)
+    #Grab the screenshot
+    browser.save_screenshot(path+ '/plots/{}.png'.format(name))
+    #Close the browser
+    browser.quit()
