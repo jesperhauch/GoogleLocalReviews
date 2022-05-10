@@ -136,6 +136,7 @@ def save_to_png(name,m):
 
     path=os.getcwd()
     m.save(path+'/img/'+name+'.html')
+    
 
     #Save the map as an HTML file
     fn='/img/{}.html'.format(name)
@@ -150,3 +151,6 @@ def save_to_png(name,m):
     browser.save_screenshot(path+ '/img/{}.png'.format(name))
     #Close the browser
     browser.quit()
+
+
+    

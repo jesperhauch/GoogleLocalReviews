@@ -43,12 +43,16 @@ class Endpoint(object):
             recommendation['clean_index'] = [int(i[1:]) for i in recommendation.index] 
         
         # Return df similiarity to other grids
-        resp = np.asarray(recommendation.sort_values(by="cosine_similarity").tail(5).index)
+        #resp = np.asarray(recommendation.sort_values(by="cosine_similarity").tail(5))
+        resp = recommendation.sort_values(by="cosine_similarity", ascending=False).head(5)
         return resp
 
 if __name__ == "__main__":
-    IDs = ['101742583391038750118','100574642292837870712']
-    Ratings = [4,2]
+    #IDs = ['101742583391038750118','100574642292837870712']
+    #Ratings = [4,2]
+
+    IDs= ['117894493394086195117', '104063119900400467553', '109257478465059465681', '108826432794361150085', '108474869308709310130']
+    Ratings = [4, 5, 5, 1, 3]
 
     # Pythonic way to transpose list of lists 
     data = list(map(list, zip(IDs, Ratings)))
