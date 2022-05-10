@@ -43,9 +43,7 @@ class Endpoint(object):
             recommendation['clean_index'] = [int(i[1:]) for i in recommendation.index] 
         
         # Return df similiarity to other grids
-        #resp = np.asarray(recommendation.sort_values(by="cosine_similarity").tail(5))
-        resp = recommendation.sort_values(by="cosine_similarity", ascending=False).head(5)
-        return resp
+        return recommendation.sort_values(by="cosine_similarity", ascending=False).reset_index().values
 
 if __name__ == "__main__":
     #IDs = ['101742583391038750118','100574642292837870712']
