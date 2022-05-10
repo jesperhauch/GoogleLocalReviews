@@ -135,10 +135,10 @@ def save_to_png(name,m):
     delay = 3
 
     path=os.getcwd()
-    m.save(path+'/plots/'+name+'.html')
+    m.save(path+'/img/'+name+'.html')
 
     #Save the map as an HTML file
-    fn='/plots/{}.html'.format(name)
+    fn='/img/{}.html'.format(name)
     tmpurl= 'file://{path}/{mapfile}'.format(path=path,mapfile=fn)
     #Open a browser window...
     browser = webdriver.Chrome(ChromeDriverManager().install())
@@ -147,6 +147,6 @@ def save_to_png(name,m):
     #Give the map tiles some time to load
     time.sleep(delay)
     #Grab the screenshot
-    browser.save_screenshot(path+ '/plots/{}.png'.format(name))
+    browser.save_screenshot(path+ '/img/{}.png'.format(name))
     #Close the browser
     browser.quit()
